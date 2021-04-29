@@ -5,6 +5,10 @@ function level1 () {
     tiles.setTilemap(tilemap`level2`)
     tiles.placeOnRandomTile(mySprite, assets.tile`myTile8`)
 }
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile13`, function (sprite, location) {
+    game.showLongText("Game Over", DialogLayout.Bottom)
+    tiles.placeOnRandomTile(mySprite, assets.tile`myTile8`)
+})
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (jump < 1) {
         mySprite.vy = -100
@@ -34,6 +38,10 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile9`, function (sprite, location) {
     level2()
 })
+function level3 () {
+    tiles.setTilemap(tilemap`level4`)
+    tiles.placeOnRandomTile(mySprite, assets.tile`myTile8`)
+}
 function level2 () {
     tiles.setTilemap(tilemap`level3`)
     tiles.placeOnRandomTile(mySprite, assets.tile`myTile8`)
@@ -57,6 +65,15 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
         . . c b d d d d d 5 5 5 b b . . 
         . . . c c c c c c c c b b . . . 
         `)
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile10`, function (sprite, location) {
+    sprite.vy = -50
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile14`, function (sprite, location) {
+    level3()
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile11`, function (sprite, location) {
+    sprite.vy = -50
 })
 let jump = 0
 let mySprite: Sprite = null
