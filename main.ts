@@ -5,14 +5,20 @@ function level1 () {
     tiles.setTilemap(tilemap`level2`)
     tiles.placeOnRandomTile(mySprite, assets.tile`myTile8`)
 }
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile15`, function (sprite, location) {
+    game.showLongText("Game Over", DialogLayout.Bottom)
+    tiles.placeOnRandomTile(mySprite, assets.tile`myTile8`)
+})
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile13`, function (sprite, location) {
     game.showLongText("Game Over", DialogLayout.Bottom)
     tiles.placeOnRandomTile(mySprite, assets.tile`myTile8`)
 })
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (jump < 1) {
-        mySprite.vy = -100
-        jump += 1
+    if (mySprite.isHittingTile(CollisionDirection.Bottom)) {
+        if (jump < 1) {
+            mySprite.vy = -100
+            jump += 1
+        }
     }
 })
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -46,6 +52,10 @@ function level2 () {
     tiles.setTilemap(tilemap`level3`)
     tiles.placeOnRandomTile(mySprite, assets.tile`myTile8`)
 }
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile16`, function (sprite, location) {
+    game.showLongText("you win!", DialogLayout.Bottom)
+    level1()
+})
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     mySprite.setImage(img`
         . . . . . . . . . . b 5 b . . . 
@@ -199,7 +209,7 @@ scene.setBackgroundImage(img`
     ................................................................................................................................................................
     ................................................................................................................................................................
     `)
-game.showLongText("123", DialogLayout.Bottom)
+game.showLongText("wata", DialogLayout.Bottom)
 mySprite = sprites.create(img`
     . . . . . . . . . . b 5 b . . . 
     . . . . . . . . . b 5 b . . . . 
