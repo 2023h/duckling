@@ -23,22 +23,22 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
 })
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     mySprite.setImage(img`
-        . . . b 5 b . . . . . . . . . . 
-        . . . . b 5 b . . . . . . . . . 
-        . . . . . c b . . . . . . . . . 
-        . . . . b b b b b b . . . . . . 
-        . . . b 5 5 5 5 5 b b . . . . . 
-        . . f d 5 5 f 1 d 5 b b . . . . 
-        . . c 4 d 5 f f 1 5 5 b . . . . 
-        . . 4 4 d d b f d 5 5 b . . . . 
-        b 4 4 4 4 4 5 5 5 d b b d d d b 
-        . b 4 4 4 4 4 5 5 b 5 5 5 d b b 
-        . . b 5 5 5 5 5 d 5 5 5 5 c d b 
-        . b 5 5 5 5 5 5 b 5 5 d c d d c 
-        . b 5 5 5 5 5 5 5 b c c d d b c 
-        . b d 5 5 5 5 5 d d d d d d c . 
-        . . b b 5 5 5 d d d d d b c . . 
-        . . . b b c c c c c c c c . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . f f . . . . . . . . . 
+        . . . . f 6 6 f f . . . . . . . 
+        . . f f 9 9 5 6 6 f f f . . f f 
+        . f 5 5 9 9 9 5 6 6 5 5 f f 9 9 
+        f 9 9 5 5 9 9 5 6 6 6 5 5 9 9 6 
+        9 f 9 5 5 6 9 5 6 6 6 5 5 9 9 6 
+        9 9 9 5 5 6 9 5 6 6 6 5 5 9 9 6 
+        f 9 9 9 9 6 5 5 6 6 5 5 f f 9 9 
+        . f f 9 9 5 5 6 6 f f f . . f f 
+        . . . f f f f f f . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
         `)
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile9`, function (sprite, location) {
@@ -56,24 +56,27 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile16`, function (sprite, 
     game.showLongText("you win!", DialogLayout.Bottom)
     level1()
 })
+scene.onHitWall(SpriteKind.Enemy, function (sprite, location) {
+    sprite.destroy()
+})
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     mySprite.setImage(img`
-        . . . . . . . . . . b 5 b . . . 
-        . . . . . . . . . b 5 b . . . . 
-        . . . . . . . . . b c . . . . . 
-        . . . . . . b b b b b b . . . . 
-        . . . . . b b 5 5 5 5 5 b . . . 
-        . . . . b b 5 d 1 f 5 5 d f . . 
-        . . . . b 5 5 1 f f 5 d 4 c . . 
-        . . . . b 5 5 d f b d d 4 4 . . 
-        b d d d b b d 5 5 5 4 4 4 4 4 b 
-        b b d 5 5 5 b 5 5 4 4 4 4 4 b . 
-        b d c 5 5 5 5 d 5 5 5 5 5 b . . 
-        c d d c d 5 5 b 5 5 5 5 5 5 b . 
-        c b d d c c b 5 5 5 5 5 5 5 b . 
-        . c d d d d d d 5 5 5 5 5 d b . 
-        . . c b d d d d d 5 5 5 b b . . 
-        . . . c c c c c c c c b b . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . f f . . . . . 
+        . . . . . . . f f 6 6 f . . . . 
+        f f . . f f f 6 6 5 9 9 f f . . 
+        9 9 f f 5 5 6 6 5 9 9 9 5 5 f . 
+        6 9 9 5 5 6 6 6 5 9 9 5 5 9 9 f 
+        6 9 9 5 5 6 6 6 5 9 6 5 5 9 f 9 
+        6 9 9 5 5 6 6 6 5 9 6 5 5 9 9 9 
+        9 9 f f 5 5 6 6 5 5 6 9 9 9 9 f 
+        f f . . f f f 6 6 5 5 9 9 f f . 
+        . . . . . . . f f f f f f . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
         `)
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile10`, function (sprite, location) {
@@ -85,6 +88,10 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile14`, function (sprite, 
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile11`, function (sprite, location) {
     sprite.vy = -50
 })
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
+    sprite.destroy()
+})
+let mySprite2: Sprite = null
 let jump = 0
 let mySprite: Sprite = null
 scene.setBackgroundImage(img`
@@ -211,27 +218,55 @@ scene.setBackgroundImage(img`
     `)
 game.showLongText("wata", DialogLayout.Bottom)
 mySprite = sprites.create(img`
-    . . . . . . . . . . b 5 b . . . 
-    . . . . . . . . . b 5 b . . . . 
-    . . . . . . . . . b c . . . . . 
-    . . . . . . b b b b b b . . . . 
-    . . . . . b b 5 5 5 5 5 b . . . 
-    . . . . b b 5 d 1 f 5 5 d f . . 
-    . . . . b 5 5 1 f f 5 d 4 c . . 
-    . . . . b 5 5 d f b d d 4 4 . . 
-    b d d d b b d 5 5 5 4 4 4 4 4 b 
-    b b d 5 5 5 b 5 5 4 4 4 4 4 b . 
-    b d c 5 5 5 5 d 5 5 5 5 5 b . . 
-    c d d c d 5 5 b 5 5 5 5 5 5 b . 
-    c b d d c c b 5 5 5 5 5 5 5 b . 
-    . c d d d d d d 5 5 5 5 5 d b . 
-    . . c b d d d d d 5 5 5 b b . . 
-    . . . c c c c c c c c b b . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . f f . . . . . . . . . 
+    . . . . f 6 6 f f . . . . . . . 
+    . . f f 9 9 5 6 6 f f f . . f f 
+    . f 5 5 9 9 9 5 6 6 5 5 f f 9 9 
+    f 9 9 5 5 9 9 5 6 6 6 5 5 9 9 6 
+    9 f 9 5 5 6 9 5 6 6 6 5 5 9 9 6 
+    9 9 9 5 5 6 9 5 6 6 6 5 5 9 9 6 
+    f 9 9 9 9 6 5 5 6 6 5 5 f f 9 9 
+    . f f 9 9 5 5 6 6 f f f . . f f 
+    . . . f f f f f f . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    . . . . . . . . . . . . . . . . 
     `, SpriteKind.Player)
 controller.moveSprite(mySprite, 100, 0)
 scene.cameraFollowSprite(mySprite)
 jump = 0
 level1()
+game.onUpdateInterval(5000, function () {
+    mySprite2 = sprites.create(img`
+        ........ff..........
+        ........ff..........
+        .....eee2222........
+        ......22ffeee.......
+        ........22..........
+        .......5555.........
+        ......55dd55........
+        .....5dd55dd5.......
+        .....d522255d.......
+        ....552999255225....
+        ....5529992552255...
+        ....5529992552255ddf
+        ...55552225552255...
+        ...55555555552255fff
+        ...555dddddd55255.55
+        ...5dd999999dd5...99
+        ...d9999999999d.....
+        ...999999999199.....
+        ...999999991199.....
+        ....9999991199......
+        .....99191199.......
+        ......999999........
+        `, SpriteKind.Enemy)
+    mySprite2.setPosition(randint(mySprite.x - 80, mySprite.x + 80), 0)
+    mySprite2.vy = 50
+})
 forever(function () {
     if (mySprite.isHittingTile(CollisionDirection.Bottom)) {
         jump = 0
